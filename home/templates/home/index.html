@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Jpndex{% endblock %}
+{% block javascript %}
+	<script type="text/javascript" src="{{STATIC_URL}}js/cloud.js"></script>	
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<script type="text/javascript">
+    //start = '2013-07-31 00:00';
+    //end   = '2013-08-02 00:00';
+    start = '{{start}}';
+    end   = '{{end}}';
+</script>
+<h3>Sendex</h3>
+<div id="graph" class=box>
+    
+</div>
+<h3>Word Cloud</h3>
+<div id="cloud" class=box>
+   
+    {% include "home/cloud.html" %}
+
+</div>
+<h3>Tweet Origins</h3>
+<diV id="map" class=box>
+    {% include "home/map.html" %}
+</diV>
+{% endblock %}

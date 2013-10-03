@@ -1,0 +1,306 @@
+/* @import url(http://fonts.googleapis.com/css?family=Pacifico); */
+
+html, body, div, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, p, blockquote, button{
+margin:0;
+padding:0;
+line-height: normal;
+outline:none;
+}
+
+body{font-size:11px;}
+
+h1, h2, h3, h4, h5, h6, pre, code, address, caption, cite, code, em, strong, th {
+font-size:1em;
+font-style:normal;
+font-weight:normal;
+outline:none;
+}
+
+a, button, select { outline:none;text-decoration:none;}
+a:focus, button:focus, img:focus, select:focus { outline:none;text-decoration:none; }
+a:active, button:active, img:active, select:active { outline:none;text-decoration:none; }
+a:hover{text-decoration: none;}
+
+img { outline:none;text-decoration:none;border:0px;border-style:none;}
+
+button::-moz-focus-inner { border: 0; }
+select::-moz-focus-inner { border: 0; }
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, textarea:focus{
+    outline: none;-webkit-focus-ring-color:  rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+}
+
+ol, ul {list-style: none;}
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after,
+q:before, q:after {content: '';content: none;}
+table {border-collapse: collapse;border-spacing: 0;}
+
+
+@font-face{ 
+    font-family: 'WebFont'; 
+    src: url('Webfont/webfont.eot'); 
+    src: url('Webfont/webfont.eot?#iefix') format('embedded-opentype'), 
+    url('Webfont/webfont.woff') format('woff'), 
+    url('Webfont/webfont.ttf') format('truetype'), 
+    url('Webfont/webfont.svg#webfont') format('svg');
+}
+.normal{
+    font-family: 'Meta-Normal', 'Helvetica', sans-serif;
+}
+.helvetica{
+    font-family: 'HelveticaNeue Bold', 'Helvetica', sans-serif;
+}
+.webfont{
+    font-family: "Webfont";
+    font-style: normal;
+    font-weight: normal;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+/* ~~~~~~~~~ common ~~~~~~~~~~ */
+
+body, select, input, textarea {
+	/* font-family: helvetica, verdana, sans-serif; */
+	/* color: #333; */
+	font-size: small;
+    font-family: 'HelveticaNeue', 'Helvetica', sans-serif;
+    background: url(../images/back3.png);
+}
+body {
+    position:absolute;
+    top:0;
+    bottom:0;
+    min-height:100%;
+    width: 100%;
+}
+
+h1 {
+	font-weight: normal;
+	font-family: Helvetica, sans-serif;
+	font-size: xx-large;
+}
+h2 {
+	font-weight: normal;
+	font-family: Helvetica, sans-serif;
+	font-size: x-large;
+}
+h3{
+    font-weight: normal;
+	font-family: Helvetica, sans-serif;
+	font-size: large;
+}
+h4{
+    font-weight: normal;
+	font-family: Helvetica, sans-serif;
+	font-size: medium;
+}
+
+article{
+    font-size:small;
+    margin:10px;
+}
+
+p{
+    padding:20px 10px;
+}
+
+.x-small{font-size: x-small;}
+.small{font-size:small;}
+.normal{font-size:normal;}
+.large{font-size:large;}
+.x-large{font-size:x-large;}
+
+
+.corner-3{border-radius: 3px;}
+.corner-5{border-radius: 5px;}
+
+nav li.selected{
+    font-weight: bold;
+    text-shadow: 1px -2px #3572a0;    
+}
+.show-hide-toggle{
+    margin:0;
+} 
+
+.show-hide-toggle a{
+    font-size: small;  
+    color:#ccc;
+}
+
+.show-hide-toggle i{
+    display: inline-block;
+    vertical-align: middle;
+    font-size:22px;
+    width:15px;
+}
+.show-hide-toggle hr{
+    width:735px;
+    display: inline-block;
+    vertical-align: middle;
+    border:none;
+    border-top:1px solid #ddd;
+    margin-left: 5px;
+}
+
+.hide{
+    margin-bottom: 40px;
+    display: block;
+    background: none;
+}
+
+.box{
+    width:760px;
+	margin-top:10px;
+	border-radius: 5px;
+	border:1px solid #ddd;
+}
+
+.tabbed-box{
+    padding-top:20px;
+	border-radius: 5px;	
+	border:1px solid #ddd;
+	background-color: #fff;
+}
+
+.nav.nav-tabs.tab-box{
+    margin-bottom: -1px;
+    width:736px;
+    border-bottom-style:solid 1px #fff;
+}
+
+.nav-tabs:first-child{
+    margin-left:20px;
+}
+
+.nav-tabs li a{
+    line-height:16px;
+}
+.nav-tabs li a i{
+    font-size:medium;
+}
+.nav-tabs li.active a i{
+    color:#999;
+}
+
+.circle{
+    border-radius:50%;
+}
+
+.circle.small{
+    width:15px;
+    height:15px;
+}
+.circle.medium{
+    width:30px;
+    height:30px;
+}
+.circle.large{
+    width:90px;
+    height:90px;
+}
+
+.degree-1{opacity:1.0;}
+.degree-2{opacity:0.8;}
+.degree-3{opacity:0.6;}
+.degree-4{opacity:0.4;}
+.degree-5{opacity:0.2;}
+
+.fadeIn { 
+	/* CSS needed for animation
+	---------------------------------------------------- */
+	opacity:0;
+	-webkit-animation:fadeIn ease-in 1;
+	-moz-animation:fadeIn ease-in 1;
+	-o-animation:fadeIn ease-in 1;
+	animation:fadeIn ease-in 1;
+	-webkit-animation-fill-mode:forwards;
+	-moz-animation-fill-mode:forwards;
+	-o-animation-fill-mode:forwards;
+	animation-fill-mode:forwards;
+}
+ 
+/* Animation Times - Time for image to fade in
+---------------------------------------------------- */
+.fadeIn-1s {
+	-webkit-animation-duration:1s;
+	-moz-animation-duration:1s;
+	-o-animation-duration:1s;
+	animation-duration:1s;
+}
+
+.fadeIn-2s {
+	-webkit-animation-duration:2s;
+	-moz-animation-duration:2s;
+	-o-animation-duration:2s;
+	animation-duration:2s;
+}
+ 
+.fadeIn-3s {
+	-webkit-animation-duration:3s;
+	-moz-animation-duration:3s;
+	-o-animation-duration:3s;
+	animation-duration:3s;
+}
+ 
+/* Animation Delay - Time for image to be delayed
+---------------------------------------------------- */
+.fadeIn-Delay-1s {
+	-webkit-animation-delay:1s;
+	-moz-animation-delay:1s;
+	-o-animation-delay:1s;
+	animation-delay:1s;
+}
+ 
+.fadeIn-Delay-5s {
+	-webkit-animation-delay:5s;
+	-moz-animation-delay:5s;
+	-o-animation-delay:5s;
+	animation-delay:5s;
+}
+
+/* Key Frames
+---------------------------------------------------- */
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes    fadeIn { from { opacity:0; } to { opacity:1; } }
+@-o-keyframes      fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes         fadeIn { from { opacity:0; } to { opacity:1; } }
+
+
+/*~~~~~ tooltips ~~~~~*/
+
+
+
+/* ~~~~~~~~~ graphs ~~~~~~~~~ */
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #aaa;
+    stroke-width:1px;
+}
+text{
+	fill:#aaa;
+	font-size: 10px;
+	font-family:Helvetica, sans-serif;	
+}
+
+.x.axis path{}
+.y.axis path{}
+
+.line {
+  fill: none;
+  stroke:none;
+  stroke-width: 2.5px;
+}
+
+.text{
+	fill:#999;
+	font-size: 10px;
+	font-family:Helvetica, sans-serif;
+}

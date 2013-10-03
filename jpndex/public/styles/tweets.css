@@ -1,0 +1,195 @@
+#tweets{
+	width:500px;
+    border-radius: 5px;
+    border:1px solid #ddd;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'HelveticaNeue', 'Helvetica', sans-serif;
+}
+
+#timeline li{
+    border-bottom: #ddd solid 1px;
+    border-top: #fff solid 1px;
+    padding: 10px 0px;
+    min-height:60px;
+    background: #efefef; /* Old browsers */
+}
+
+#timeline li a{
+    -webkit-font-smoothing:subpixel-antialiased;
+    
+}
+
+#timeline li .tweet{
+    width:410px;
+    margin-left:auto;
+    margin-right:auto;
+    line-height: 1.4;
+    -webkit-font-smoothing:subpixel-antialiased;
+}
+
+#timeline{
+    margin:0px 0px;
+    min-height:100px;
+    background-color: #efefef;
+}
+#timeline li{
+    font-size: 1.1em;
+    color:#898989;   
+    background-color: #efefef;
+}
+#timeline li img{
+    margin-right:10px;
+    margin-left:10px;
+    width:50px;
+    height:50px;
+    vertical-align: top;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+#timeline li img:hover{
+    border-color: #fff;
+    box-shadow: 0px 0px 3px #fff;
+}
+#timeline .profile:hover{
+    text-decoration: none;
+}
+#timeline li a{
+    /* color:#555; */
+    color:#ff4949;
+}
+#timeline li a:hover{
+    text-decoration: underline;
+}
+
+#timeline li a.user{
+   color:#777; 
+}
+
+#timeline li a.hash{
+   color:#aaa; 
+}
+
+.tweet{
+    display: inline-block;
+    min-height:30px;
+    vertical-align:middle;
+    white-space: normal;
+    /* text-shadow: 1px 1px #ddd, -1px -1px #666; */
+}
+.tweet a h4{
+    color:#666;
+    font-weight: bold;
+    font-size:1.0em;
+    margin-bottom:5px;
+}
+.tweet h4 .username{
+    font-size: 0.9em;
+    font-weight: normal;
+    color:#999;
+    width:auto;
+}
+.user-link:hover{
+    text-decoration: none !important;
+}
+.user-link:hover .username{
+    color:#999;
+    text-decoration: underline !important;
+}
+.twitter-buttons{
+    position: relative;
+    right:0;
+    width:495px;
+    text-align: right;
+    font-size: x-small;
+    visibility: hidden;
+    margin: 1px;
+    /* bottom:5px; */
+}
+#timeline li:hover .twitter-buttons{
+    visibility: visible;
+}
+.twitter-buttons a.webfont{
+    margin:0px 3px 1px 3px;
+    font-size:15px;
+    color:#aaa !important;
+}
+.twitter-buttons a.webfont:hover{
+    text-decoration: none !important;
+    color:#666 !important;
+}
+
+#loading{
+    display:none;
+    /* width:500px; */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+#tweets-header .webfont{
+    margin-right: 18px;
+    margin-left: 10px;
+    position: relative;
+    top:-5px;
+    vertical-align: middle;
+    cursor:default;
+}
+
+#tweets-header{
+    position: relative;
+    background-color: #ddd;
+    width:480px;
+    min-height:40px;
+    padding:10px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom: 1px solid #ccc;
+    color:#999;
+    /* text-align: center; */
+}
+
+#tweets-footer{
+    position: relative;
+    background-color: #ddd;
+    width:490px;
+    min-height:20px;
+    padding:5px;
+    /* padding-top:20px; */
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    color:#777;
+}
+
+#tweets-footer .webfont.icon{
+    color:#999;
+    display:inline-block;
+    vertical-align: middle; 
+    position: relative;
+    top:-5px;
+}
+
+.timestamp{
+    diaplay:inline-block;
+    position: absolute;
+    left:10px;
+    top:6px;
+}
+
+/*
+#tweets{
+    position: relative;
+    background-color: #eee;
+    border-radius: 8px;
+    width:500px;
+    min-height:250px;
+    height:auto;
+    border: 2px solid #ccc;
+    vertical-align: top;
+}
+*/

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Jpndex{% endblock %}
+{% block javascript %}
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<script type="text/javascript">
+
+</script>
+
+<div id=tweets>
+    <div id="tweets-header">
+        <span class="webfont icon" style="font-size:35px;" title="twitter">&#116;</span>
+        Tweets from around <b>{{end}}</b> on <b><i>"{{topic}}"</i></b> and Japan
+    </div>
+    <ul id="timeline">
+    {% for tweet in tweets %}
+        <li>
+            <a href=https://twitter.com/{{tweet.user}} class=profile target=_blank>
+                <img src={{tweet.avatar}} 
+                      onError="this.onerror=null; this.src='../public/images/default_profile.png'" />
+            </a>
+            <div class=tweet>
+                <a href=https://twitter.com/{{tweet.user}} class=user-link target=_blank>
+                    <h4>{{tweet.name}}<span class=username>@{{tweet.user}}</span></h4>
+                </a>{{tweet.tweet | safe}}
+            </div>
+            <div class=twitter-buttons>
+                <div class=timestamp>{{tweet.timestamp}}</div>
+                <a href=https://twitter.com/{{tweet.user}}/status/{{tweet.id}} 
+                style=margin-right:10px; target=_blank>view on twitter</a>
+                <a href=https://twitter.com/intent/tweet?in_reply_to={{tweet.id}} class=webfont>&#104;</a>
+                <a href=https://twitter.com/intent/retweet?tweet_id={tweet.id} class=webfont>&#74;</a>
+                <a href=https://twitter.com/intent/favorite?tweet_id={tweet.id} class=webfont>&#82;</a>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+    <div id="tweets-footer">
+        <span class="webfont icon" style="font-size:35px;" title="twitter">&#116;</span>
+        <div id=loading>Loading...</div>
+    </div>
+</div>
+
+
+{% endblock %}

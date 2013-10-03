@@ -1,0 +1,90 @@
+<script>
+var fill = d3.scale.category20();
+var w = 760;
+var h = 400;
+
+var hour1 = round_hour((Date.parse(end).add(-5).hours())).toString('yyyy-MM-dd HH:mm');
+var hour2 = round_hour((Date.parse(end).add(-4).hours())).toString('yyyy-MM-dd HH:mm');
+
+function round_hour(d) {
+    /*d.setMinutes (d.getMinutes() + 30);
+    d.setMinutes (0);*/
+    d.setHours(d.getHours() + Math.floor(d.getMinutes()/60));
+    d.setMinutes(0);
+
+    return d;
+}
+
+
+
+
+$.get("../data/cloud", {start: hour1, end: hour2}, function(data) {
+  max = 0;
+  min = null;
+  for(d in data){
+      if(!min)
+        min = data[d].frequency;
+      max = Math.max(max, data[d].frequency);
+      min = Math.min(min, data[d].frequency);
+      
+  }
+  /* (d.frequency/max)*95 */
+  /* (Math.log(d.frequency)/max)*2000 */
+  words = data.map(function(d){return {"text":d.term, "size":(d.frequency/max)*100} })
+  
+  if(Math.floor((Math.random()*10)+1)%2==0){
+      d3.layout.cloud().size([w, h])
+      .words(words)
+      .padding(6)
+      .rotate(function() { return ~~(Math.random() * 2) * 90; })
+      .font("Impact")
+      .fontSize(function(d) { return d.size; })
+      .on("end", draw)
+      .start();
+  }
+  else{
+      d3.layout.cloud().size([w, h])
+      .words(words)
+      .padding(5)
+      .font("Impact")
+      .fontSize(function(d) { return d.size; })
+      .on("end", draw)
+      .start();   
+  }
+}, "json");
+
+function draw(words, bounds) {
+scale = bounds ? Math.min(
+  w / Math.abs(bounds[1].x - w / 2),
+  w / Math.abs(bounds[0].x - w / 2),
+  h / Math.abs(bounds[1].y - h / 2),
+  h / Math.abs(bounds[0].y - h / 2)) / 2 : 1;
+
+d3.select("#cloud").append("svg")
+    .attr("width", w)
+    .attr("height", h)
+    .attr("id", "word-cloud")
+  .append("g")
+    .attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")")
+  .selectAll("text")
+    .data(words)
+  .enter().append("text")
+    .style("font-size", function(d) { return d.size + "px"; })
+    .style("font-family", "Impact")
+    .style("fill", function(d, i) { return fill(i); })
+    .attr("text-anchor", "middle")
+
+    .attr("transform", function(d) {
+      return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+    })
+    .attr("xlink:href", function(d) { return "../data/tweets"; })
+    .on('mouseover', function(d){d3.select(this).style('opacity',0.5) /* d3.rgb(d3.select(this)).darker(0.5) */})
+    .on('mouseout', function(d){d3.select(this).style('opacity',1.0)})  
+    .on('click', function (d) {   
+        window.location.assign("../tweets?text="+d.text+"&start="+start+"&end="+end);
+    })
+    .text(function(d) { return d.text; })
+    .style('cursor', 'pointer')
+    ;
+}
+</script>
