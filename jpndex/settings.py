@@ -2,7 +2,7 @@
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-PRODUCTION = False
+PRODUCTION = True
 
 import os
 if not PRODUCTION: import config
@@ -26,10 +26,10 @@ DATABASES = {
     },
     'data': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hippopo1_japondex',
-        'USER': 'hippopo1_jpndex',
+        'NAME': 'sendex',
+        'USER': 'kippl',
         'PASSWORD': SECRET,
-        'HOST': '66.147.244.90',
+        'HOST': 'platypo.us',
         'PORT': '',
     }
 }
