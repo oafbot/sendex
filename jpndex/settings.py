@@ -2,7 +2,7 @@
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-PRODUCTION = False
+PRODUCTION = True
 
 import os
 if not PRODUCTION: import config
