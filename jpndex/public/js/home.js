@@ -19,7 +19,6 @@ function onDocumentReady(){
 }
 
 function draw_dex(one_hour, two_days){    
-
     
     var times = [];
     var ex = "key !== 'time'";

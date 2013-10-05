@@ -3,8 +3,10 @@ var fill = d3.scale.category20();
 var w = 760;
 var h = 400;
 
-var hour1 = round_hour((Date.parse(end).add(-5).hours())).toString('yyyy-MM-dd HH:mm');
-var hour2 = round_hour((Date.parse(end).add(-4).hours())).toString('yyyy-MM-dd HH:mm');
+var offset = Date.today().getUTCOffset();
+var hour1 = round_hour(Date.parse(end).addHours(-1)).setTimezoneOffset(0).toString('yyyy-MM-dd HH:mm');
+var hour2 = round_hour(Date.parse(end).addHours(0)).setTimezoneOffset(0).toString('yyyy-MM-dd HH:mm');
+
 
 function round_hour(d) {
     /*d.setMinutes (d.getMinutes() + 30);
@@ -21,6 +23,7 @@ function round_hour(d) {
 $.get("../data/cloud", {start: hour1, end: hour2}, function(data) {
   max = 0;
   min = null;
+  
   for(d in data){
       if(!min)
         min = data[d].frequency;
