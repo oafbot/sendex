@@ -6,8 +6,8 @@ PRODUCTION = True
 
 import os
 if not PRODUCTION: import config
-SECRET = os.environ['SECRET']
-
+DB_PASS = os.environ['DB_PASS']
+SALT = os.environ['SALT']
 
 ADMINS = (
     ('Leonard M. Witzel', 'witzel@post.harvard.edu'),
@@ -20,7 +20,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'jpndex',
         'USER': 'root',
-        'PASSWORD': SECRET,
+        'PASSWORD': DB_PASS,
         'HOST': '', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '', # Set to empty string for default.
     },
@@ -28,7 +28,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sendex',
         'USER': 'kippl',
-        'PASSWORD': SECRET,
+        'PASSWORD': DB_PASS,
         'HOST': 'platypo.us',
         'PORT': '',
     }
@@ -44,7 +44,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/New_York'
+TIME_ZONE = 'UTC'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -99,7 +99,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'f^w#ep2mx$z0j(0n!+_@#r)41y3!%tzxunec%m^-)$nk%c82qs'
+SECRET_KEY = SALT
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

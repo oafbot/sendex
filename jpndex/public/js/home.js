@@ -12,7 +12,7 @@ else
 	onDocumentReady();
 	
 function onDocumentReady(){
-    var hour_ago = Date.parse(end).addHours(-1).toString('yyyy-MM-dd HH:mm');
+    var hour_ago = Date.parse(end).addHours(-1).toString('yyyy-MM-dd HH:mm:ss');
     var two_days = "start=" + start + "&end=" + end;
     var one_hour = "start=" + hour_ago + "&end=" + end;
     draw_dex(one_hour, two_days);
@@ -40,14 +40,14 @@ function draw_dex(one_hour, two_days){
     
     var xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottom");
+        .orient("bottom").ticks(12);
     
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left");
     
     var line = d3.svg.line()
-            /* .interpolate("monotone") */
+        /* .interpolate("monotone") */
         /* .interpolate("cardinal") */
         /* .interpolate("basis") */
         .x(function(d) { return x(d.time); })
@@ -74,7 +74,7 @@ function draw_dex(one_hour, two_days){
         return d3.svg.axis()
             .scale(x)
              .orient("bottom")
-             .ticks(32)
+             .ticks(48)
              /* .ticks(8) */
     }
     
@@ -89,19 +89,19 @@ function draw_dex(one_hour, two_days){
     d3.json("../data/graph?"+two_days, function(error, data) {
         
         /*if(exclude != null) for(n in exclude) ex += " && key != '" + exclude[n] + "'";*/
-                   
+                 
         color.domain(d3.keys(data[0]).filter(function(key) { return eval(ex); }));
         
         var table = [];
         var scores = [];
-        var c = 0;
+        var c = 0;        
         
         data.forEach(function(d) {
     	    times.push(d.time);
     	    table[c] = d['jpndex'];
     	    c ++;
         });
-                
+        
         var plots = color.domain().map(function(name){
           return{
               name: name,
@@ -219,12 +219,14 @@ function draw_dex(one_hour, two_days){
     var max_score = d3.max(scores)*1.1;
     var min_score = d3.min(scores)*0.9;
     
-    var spacing = 100;
+    var spacing = 4800;
     
     function update_circle(){
-        var xpos = d3.mouse(this)[0] - margin.left;
-        var index = (table.length)*(xpos/width);
+        var xpos  = d3.mouse(this)[0] - margin.left;
+        var index = Math.round((table.length)*(xpos/width));
         var ypos;
+        
+        console.log(index)
         
         if(xpos > 0 && xpos < width){
 /*
@@ -240,7 +242,7 @@ function draw_dex(one_hour, two_days){
             } 
 */
             //else{
-                ypos = height - ((table[Math.floor(index)] - min_score) / ((max_score- min_score) / height));
+                ypos = height - ((table[index]-min_score) / ((max_score-min_score)/height));
             //}
             circle
             .attr("cx", xpos)
@@ -256,11 +258,11 @@ function draw_dex(one_hour, two_days){
             tooltip.style("top", (ypos+80)+"px").style("left",(d3.event.pageX+20)+"px")
             
             var time = times[Math.floor(index)];
-            var h  = Date.parse(time).addHours(-2).toString('yyyy-MM-dd HH:mm'); //Gotcha UTC!!
+            var h  = Date.parse(time).addHours(-1).toString('yyyy-MM-dd HH:mm'); //Gotcha UTC!!
             var h1 = "start=" + h + "&end=" + time;
             var c = 0;
             var cap = 5;
-            var display_date = Date.parse(h).addHours(+2).toString('MMM d,  h:mmtt')
+            var display_date = Date.parse(time).toString('MMM d,  h:mmtt')
             var word = "<h4>"+display_date+"</h4><ul>"
             
             d3.json("../data/cloud?"+h1, function(error, data) {

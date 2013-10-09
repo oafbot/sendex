@@ -4,21 +4,8 @@ var w = 760;
 var h = 400;
 
 var offset = Date.today().getUTCOffset();
-var hour1 = round_hour(Date.parse(end).addHours(-1)).setTimezoneOffset(0).toString('yyyy-MM-dd HH:mm');
-var hour2 = round_hour(Date.parse(end).addHours(0)).setTimezoneOffset(0).toString('yyyy-MM-dd HH:mm');
-
-
-function round_hour(d) {
-    /*d.setMinutes (d.getMinutes() + 30);
-    d.setMinutes (0);*/
-    d.setHours(d.getHours() + Math.floor(d.getMinutes()/60));
-    d.setMinutes(0);
-
-    return d;
-}
-
-
-
+var hour1 = Date.parse(end).addHours(-1).setTimezoneOffset(0).toString('yyyy-MM-dd HH:mm:ss');
+var hour2 = Date.parse(end).addHours(0).setTimezoneOffset(0).toString('yyyy-MM-dd HH:mm:ss');
 
 $.get("../data/cloud", {start: hour1, end: hour2}, function(data) {
   max = 0;

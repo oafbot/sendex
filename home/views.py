@@ -2,11 +2,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils.timezone import utc
 from models import *
 import json, datetime
 
 def index(request):
-    now   = datetime.datetime.utcnow()
+    now   = datetime.datetime.utcnow().replace(tzinfo=utc)
     start = (now + datetime.timedelta(days=-2)).strftime("%Y-%m-%d %H:%M")
     end   = now.strftime("%Y-%m-%d %H:%M")
     

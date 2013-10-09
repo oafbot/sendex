@@ -30,7 +30,7 @@ def index(request):
                 for tweet in data]
     
     #st = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M').strftime("%b %d %Y")
-    ed = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M').strftime("%b %d %Y")
+    ed = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S').strftime("%b %d %Y")
     
     return render_to_response('tweets/index.html',{"page":"tweets", "tweets":tweets, "topic":request.GET["text"], "end":ed}, context_instance=RequestContext(request))
 

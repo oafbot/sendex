@@ -70,7 +70,7 @@ body, select, input, textarea {
 	/* color: #333; */
 	font-size: small;
     font-family: 'HelveticaNeue', 'Helvetica', sans-serif;
-    background: url(../images/back3.png);
+    /* background: url(../images/back.png); */
 }
 body {
     position:absolute;

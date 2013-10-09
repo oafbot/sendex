@@ -5,6 +5,7 @@ from django.template import RequestContext
 from models import *
 import json, datetime
 
+
 def cloud(request):
     query = {}
     cloud = Wordcloud.objects
