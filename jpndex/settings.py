@@ -2,10 +2,10 @@
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-PRODUCTION = True
 
 import os
-if not PRODUCTION: import config
+# Passwords stored in venv/bin/activate for local, 
+# heroku config:add SECRET=secret_pass for production.
 DB_PASS = os.environ['DB_PASS']
 SALT = os.environ['SALT']
 
@@ -76,7 +76,6 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-import os
 SETTINGS_ROOT = os.path.dirname(__file__)
 SUPER_DIR = os.path.abspath(os.path.join(SETTINGS_ROOT, os.path.pardir))
 STATIC_ROOT = os.path.join(SUPER_DIR, "public")
@@ -178,9 +177,8 @@ LOGGING = {
 # ===================
 # = HEROKU SETTINGS =
 # ===================
-if PRODUCTION:
-    import dj_database_url
-    DATABASES['default'] =  dj_database_url.config()
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    ALLOWED_HOSTS = ['*']
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ALLOWED_HOSTS = ['*']
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
