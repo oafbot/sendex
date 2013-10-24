@@ -1,5 +1,6 @@
 <script>
-var fill = d3.scale.category20();
+var fillP = d3.scale.ordinal().range(['#57a1ff', '#6399f3', '#8e7cff', '#a96aff']);
+var fillN = d3.scale.ordinal().range(['#ff4566', '#e04d73', '#db55a6', '#c95cc7']);
 var w = 760;
 var h = 400;
 
@@ -7,20 +8,11 @@ var offset = Date.today().getUTCOffset();
 var hour1 = Date.parse(end).addHours(-2).setTimezoneOffset(offset).toString('yyyy-MM-dd HH:mm:ss');
 var hour2 = Date.parse(end).addHours(-1).setTimezoneOffset(offset).toString('yyyy-MM-dd HH:mm:ss');
 
-$.get("../data/cloud", {start: hour1, end: hour2}, function(data) {
+$.get("../data/informative", {start: hour1, end: hour2}, function(data) {
   max = 0;
   min = null;
   
-  for(d in data){
-      if(!min)
-        min = data[d].frequency;
-      max = Math.max(max, data[d].frequency);
-      min = Math.min(min, data[d].frequency);
-      
-  }
-  /* (d.frequency/max)*95 */
-  /* (Math.log(d.frequency)/max)*2000 */
-  words = data.map(function(d){return {"text":d.term, "size":(d.frequency/max)*100} })
+  words = data.map(function(d){return {"text":d.term, "size":(35-data.indexOf(d))+15, "sentiment":d.classification} })
   
   if(Math.floor((Math.random()*10)+1)%2==0){
       d3.layout.cloud().size([w, h])
@@ -29,7 +21,7 @@ $.get("../data/cloud", {start: hour1, end: hour2}, function(data) {
       .rotate(function() { return ~~(Math.random() * 2) * 90; })
       .font("Impact")
       .fontSize(function(d) { return d.size; })
-      .on("end", draw)
+      .on("end", draw_informative)
       .start();
   }
   else{
@@ -38,19 +30,19 @@ $.get("../data/cloud", {start: hour1, end: hour2}, function(data) {
       .padding(5)
       .font("Impact")
       .fontSize(function(d) { return d.size; })
-      .on("end", draw)
+      .on("end", draw_informative)
       .start();   
   }
 }, "json");
 
-function draw(words, bounds) {
+function draw_informative(words, bounds) {
 scale = bounds ? Math.min(
   w / Math.abs(bounds[1].x - w / 2),
   w / Math.abs(bounds[0].x - w / 2),
   h / Math.abs(bounds[1].y - h / 2),
   h / Math.abs(bounds[0].y - h / 2)) / 2 : 1;
 
-d3.select("#cloud").append("svg")
+d3.select("#informative").append("svg")
     .attr("width", w)
     .attr("height", h)
     .attr("id", "word-cloud")
@@ -61,7 +53,9 @@ d3.select("#cloud").append("svg")
   .enter().append("text")
     .style("font-size", function(d) { return d.size + "px"; })
     .style("font-family", "Impact")
-    .style("fill", function(d, i) { return fill(i); })
+    .style("fill", function(d, i) { 
+        if(d.sentiment=='P') return fillP(Math.floor(i/10)); 
+        else return fillN(Math.floor(i/10));})
     .attr("text-anchor", "middle")
 
     .attr("transform", function(d) {

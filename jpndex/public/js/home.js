@@ -12,7 +12,9 @@ else
 	onDocumentReady();
 	
 function onDocumentReady(){
-    var hour_ago = Date.parse(end).addHours(-1).toString('yyyy-MM-dd HH:mm:ss');
+    var offset = Date.today().getUTCOffset();
+    var hour_ago = Date.parse(end).addHours(-3).toString('yyyy-MM-dd HH:mm:ss');
+    var end_hour = Date.parse(end).addHours(-2).toString('yyyy-MM-dd HH:mm:ss');
     var two_days = "start=" + start + "&end=" + end;
     var one_hour = "start=" + hour_ago + "&end=" + end;
     draw_dex(one_hour, two_days);
@@ -290,7 +292,7 @@ function draw_dex(one_hour, two_days){
             .style("opacity", "0")
             .transition().duration(50).delay(0).ease('in')
             .style("opacity", "1");
-        }); 
+        });
     });
 }
 

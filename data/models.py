@@ -23,7 +23,6 @@ class Jpndex(models.Model):
         
     def json(self):
         from collections import OrderedDict
-        #import ordereddict as OrderedDict
         return OrderedDict((
             ('time' , str(self.stamp)[:-9]),
             ('jpndex', self.jpndex),
@@ -41,9 +40,24 @@ class Wordcloud(models.Model):
 
     def json(self):
         from collections import OrderedDict
-        #import ordereddict as OrderedDict
         return OrderedDict((
             # ('time', str(self.stamp)[:-9]),
             ('term', self.term),
             ('frequency', self.frequency)
+        ))
+        
+class Predictors(models.Model):
+    id = models.IntegerField(primary_key=True)
+    stamp = models.DateTimeField()
+    term = models.CharField(max_length=128L)
+    classification = models.CharField(max_length=8L)
+    class Meta:
+        db_table = 'predictors'
+        app_label = 'data'
+
+    def json(self):
+        from collections import OrderedDict
+        return OrderedDict((
+            ('term', self.term),
+            ('classification', self.classification)
         ))
