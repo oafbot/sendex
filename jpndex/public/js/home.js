@@ -13,10 +13,10 @@ else
 	
 function onDocumentReady(){
     var offset = Date.today().getUTCOffset();
-    var hour_ago = Date.parse(end).addHours(-3).toString('yyyy-MM-dd HH:mm:ss');
-    var end_hour = Date.parse(end).addHours(-2).toString('yyyy-MM-dd HH:mm:ss');
+    var hour_ago = Date.parse(end).addHours(-5).toString('yyyy-MM-dd HH:mm:ss');
+    var end_hour = Date.parse(end).addHours(-4).toString('yyyy-MM-dd HH:mm:ss');
     var two_days = "start=" + start + "&end=" + end;
-    var one_hour = "start=" + hour_ago + "&end=" + end;
+    var one_hour = "start=" + hour_ago + "&end=" + end_hour;
     draw_dex(one_hour, two_days);
 }
 

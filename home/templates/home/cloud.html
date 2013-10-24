@@ -4,8 +4,8 @@ var w = 760;
 var h = 400;
 
 var offset = Date.today().getUTCOffset();
-var hour1 = Date.parse(end).addHours(-2).setTimezoneOffset(offset).toString('yyyy-MM-dd HH:mm:ss');
-var hour2 = Date.parse(end).addHours(-1).setTimezoneOffset(offset).toString('yyyy-MM-dd HH:mm:ss');
+var hour1 = Date.parse(end).addHours(-5).setTimezoneOffset(offset).toString('yyyy-MM-dd HH:mm:ss');
+var hour2 = Date.parse(end).addHours(-4).setTimezoneOffset(offset).toString('yyyy-MM-dd HH:mm:ss');
 
 $.get("../data/cloud", {start: hour1, end: hour2}, function(data) {
   max = 0;
