@@ -12,21 +12,22 @@ else
 	onDocumentReady();
 	
 function onDocumentReady(){
-    var offset = Date.today().getUTCOffset();
-    var hour_ago = Date.parse(end).addHours(-5).toString('yyyy-MM-dd HH:mm:ss');
-    var end_hour = Date.parse(end).addHours(-4).toString('yyyy-MM-dd HH:mm:ss');
-    var two_days = "start=" + start + "&end=" + end;
-    var one_hour = "start=" + hour_ago + "&end=" + end_hour;
-    draw_dex(one_hour, two_days);
+    var offset   = Date.today().getUTCOffset();
+    var hour_ago = Date.parse(end).addHours(-6).toString('yyyy-MM-dd HH:mm:ss');
+    var end_hour = Date.parse(end).addHours(-5).toString('yyyy-MM-dd HH:mm:ss');
+    var start_hour = Date.parse(start).addHours(-5).toString('yyyy-MM-dd HH:mm:ss');
+    var two_days = "start=" + start_hour + "&end=" + end_hour;
+    var one_hour = "start=" + Date.parse(hour_ago).addHours(-1).toString('yyyy-MM-dd HH:mm:ss') + "&end=" + Date.parse(end_hour).addHours(-1).toString('yyyy-MM-dd HH:mm:ss');
+    draw_dex(one_hour, two_days, start_hour, end_hour);
 }
 
-function draw_dex(one_hour, two_days){    
+function draw_dex(one_hour, two_days, start_hour, end_hour){    
     
     var times = [];
     var ex = "key !== 'time'";
 
-    var minDate = Date.parse(start);
-    var maxDate = Date.parse(end);
+    var minDate = Date.parse(start_hour);
+    var maxDate = Date.parse(end_hour);
     
     var x = d3.time.scale().domain([minDate, maxDate])
         .range([0, width]);
