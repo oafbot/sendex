@@ -226,7 +226,7 @@ function draw_dex(one_hour, two_days){
     
     function update_circle(){
         var xpos  = d3.mouse(this)[0] - margin.left;
-        var index = Math.round((table.length)*(xpos/width));
+        var index = Math.round((table.length-1)*(xpos/width));
         var ypos;
         
         console.log(index)

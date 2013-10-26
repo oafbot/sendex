@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Jpndex{% endblock %}
+{% block title %}Sendex{% endblock %}
 {% block javascript %}
 	<script type="text/javascript" src="{{STATIC_URL}}js/cloud.js"></script>	
 {% endblock %}
@@ -9,8 +9,6 @@
 
 {% block content %}
 <script type="text/javascript">
-    //start = '2013-09-30 00:00';
-    //end   = '2013-10-02 00:00';
     start = '{{start}}';
     end   = '{{end}}';
 </script>
