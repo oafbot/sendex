@@ -1,6 +1,6 @@
 var tweets;
-var from = 20;
-var to   = 39;
+var from = 21;
+var to   = 40;
 var loading = true;
 
 if( !window.isLoaded )
@@ -8,24 +8,23 @@ if( !window.isLoaded )
 else
 	onDocumentReady();
 	
-function onDocumentReady(){    
-    query = window.location.href.slice(window.location.href.indexOf('?') + 1)
-    
-    get_tweets(function(data){
-        //do something with data responded from the server
-        load_more(data);
-        $(window).scroll(function() {
-            if($(window).scrollTop() == $(document).height() - $(window).height()) {
-                // ajax call get data from server and append to the div
+function onDocumentReady(){
+    $(window).scroll(function() {
+        if($(window).scrollTop() == $(document).height() - $(window).height()) {
+            query = 'offset=' + from.toString() +"&"+ window.location.href.slice(window.location.href.indexOf('?') + 1);
+            // ajax call get data from server and append to the div
+            get_tweets(function(data){
+                //do something with data responded from the server
                 loading = true;
                 load_more(data);
-            }
-            else{
-                loading = false;
-            }
-        });
-        
+            });
+        }
+        else{
+            loading = false;
+        }
     });
+    
+
 }
 
 $.fn.appendText = function(text) {
@@ -36,12 +35,10 @@ $.fn.appendText = function(text) {
 };     
     
 function load_more(tweets){        
-    if( to < Object.keys(tweets).length ){
-        for(var i=from;i<to;i++)
-            append_tweet(tweets[i]);    
-        from = to + 1;
-        to += 20;
-    }
+    for(var i=0;i<19;i++)
+        append_tweet(tweets[i]);
+    from = to + 1;
+    to += 20;
 }
 
 function get_tweets(callback){

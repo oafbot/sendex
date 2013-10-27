@@ -40,11 +40,12 @@ def tweets(request):
     
     start   = request.GET["start"]
     end     = request.GET["end"]
+    offset  = int(request.GET["offset"])
 
     keyword = "\\b#?"+request.GET["text"]+"\\b"
     tweets = [t for t in db["posts"].find({'text':{"$regex": keyword, "$options": "-i"}, 
              'timestamp':{"$gte": start, "$lt": end}}, {'_id':0,'text':1,'user.screen_name':1, 'id_str':1,
-             'user.profile_image_url':1, 'user.name':1, 'timestamp':1}).sort( "$natural", -1 )]
+             'user.profile_image_url':1, 'user.name':1, 'timestamp':1}).sort( "$natural", -1 ).skip(offset).limit(20)]
     
     #keyword = "\b#?"+request.GET["text"]+"\b"
     #regex   = re.compile(keyword, re.IGNORECASE)
