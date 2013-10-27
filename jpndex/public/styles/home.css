@@ -58,6 +58,10 @@ text{
 	font-family:Helvetica, sans-serif;
 }
 
+.text.dark{
+	fill:#777;    
+}
+
 .grid .tick {
     stroke: #eee;
     opacity: 0.6;

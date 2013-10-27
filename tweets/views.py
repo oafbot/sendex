@@ -40,7 +40,7 @@ def tweets(request):
     
     start   = request.GET["start"]
     end     = request.GET["end"]
-    keyword = r"\b"+request.GET["text"]+r"\b"
+    keyword = r"\b#?"+request.GET["text"]+r"\b"
             
     tweets = [t for t in db["posts"].find({'text':{"$regex": keyword}, 'timestamp':{"$gte": start, "$lt": end}}, 
               {'_id':0,'text':1,'user.screen_name':1, 'id_str':1,

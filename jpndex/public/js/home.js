@@ -282,29 +282,27 @@ function draw_dex(one_hour, two_days){
           .attr("cy", 355 )
           .attr("cx", 0 )
           .attr("r", 8) // radius of circle
-          /* .attr("fill", '#ff8a2b') */
           .attr("fill", '#F6BB33')
-          .attr("stroke", '#999999') 
+          .attr("stroke", '#777777') 
           .style("opacity", 0.9);
     key.append("text")
             .attr("y", 350)
             .attr("x", 15)
             .attr("dy", ".71em")
-            .attr("class", "text")      
+            .attr("class", "text dark")
             .text("Volume");
     key.append("svg:circle")
           .attr("cy", 355 )
           .attr("cx", 80 )
           .attr("r", 8) // radius of circle
-          /* .attr("fill", '#ff8a2b') */
           .attr("fill", '#3ea4bf')
-          .attr("stroke", '#999999') 
+          .attr("stroke", '#777777') 
           .style("opacity", 0.9);
     key.append("text")
             .attr("y", 350)
             .attr("x", 95)
             .attr("dy", ".71em")
-            .attr("class", "text")      
+            .attr("class", "text dark")      
             .text("Sentiment");
     
     
