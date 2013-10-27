@@ -259,8 +259,8 @@ function draw_dex(one_hour, two_days){
             tooltip.style("top", (ypos+80)+"px").style("left",(d3.event.pageX+20)+"px")
             
             var time = times[Math.floor(index)];
-            var h  = Date.parse(time).addHours(-1).toString('yyyy-MM-dd HH:mm'); //Gotcha UTC!!
-            var h1 = "start=" + h + "&end=" + time;
+            var h  = Date.parse(time).addHours(1).toString('yyyy-MM-dd HH:mm'); //Gotcha UTC!!
+            var h1 = "start=" + time + "&end=" + h;
             var c = 0;
             var cap = 5;
             var display_date = Date.parse(time).toString('MMM d,  h:mmtt')
