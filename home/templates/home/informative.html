@@ -14,7 +14,7 @@ $.get("../data/informative", {start: hour1, end: hour2}, function(data) {
   
   words = data.map(function(d){return {"text":d.term, "size":(35-data.indexOf(d))+15, "sentiment":d.classification} })
   
-  if(Math.floor((Math.random()*10)+1)%2==0){
+  //if(Math.floor((Math.random()*10)+1)%2==0){
       d3.layout.cloud().size([w, h])
       .words(words)
       .padding(6)
@@ -23,8 +23,9 @@ $.get("../data/informative", {start: hour1, end: hour2}, function(data) {
       .fontSize(function(d) { return d.size; })
       .on("end", draw_informative)
       .start();
-  }
-  else{
+  //}
+  /*
+else{
       d3.layout.cloud().size([w, h])
       .words(words)
       .padding(5)
@@ -33,6 +34,7 @@ $.get("../data/informative", {start: hour1, end: hour2}, function(data) {
       .on("end", draw_informative)
       .start();   
   }
+*/
 }, "json");
 
 function draw_informative(words, bounds) {
@@ -70,5 +72,33 @@ d3.select("#informative").append("svg")
     .text(function(d) { return d.text; })
     .style('cursor', 'pointer')
     ;
+    
+    var key = d3.select("#informative svg").append("svg:g");
+    key.append("svg:circle")
+          .attr("cy", 385 )
+          .attr("cx", 30 )
+          .attr("r", 8) // radius of circle
+          .attr("fill", '#ff4566')
+          .attr("stroke", '#999999') 
+          .style("opacity", 0.9);
+    key.append("text")
+            .attr("y", 380)
+            .attr("x", 45)
+            .attr("dy", ".71em")
+            .attr("class", "text")      
+            .text("Negative");
+    key.append("svg:circle")
+          .attr("cy", 385 )
+          .attr("cx", 110 )
+          .attr("r", 8) // radius of circle
+          .attr("fill", '#3399cc')
+          .attr("stroke", '#999999')
+          .style("opacity", 0.9);
+    key.append("text")
+            .attr("y", 380)
+            .attr("x", 125)
+            .attr("dy", ".71em")
+            .attr("class", "text")      
+            .text("Positive");
 }
 </script>

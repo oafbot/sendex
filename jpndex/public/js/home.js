@@ -50,9 +50,7 @@ function draw_dex(one_hour, two_days){
         .orient("left");
     
     var line = d3.svg.line()
-        /* .interpolate("monotone") */
-        /* .interpolate("cardinal") */
-        /* .interpolate("basis") */
+        .interpolate("monotone")
         .x(function(d) { return x(d.time); })
         .y(function(d) { return y(d.score); });
     
@@ -232,7 +230,7 @@ function draw_dex(one_hour, two_days){
         console.log(index)
         
         if(xpos > 0 && xpos < width){
-/*
+            /*
             if( table[index] === undefined ){     
                 var lower = Math.floor(index);
                 var upper = Math.floor(index) + 1;
@@ -243,7 +241,7 @@ function draw_dex(one_hour, two_days){
                 ypos = between( (xpos % spacing) / spacing );
                 
             } 
-*/
+            */
             //else{
                 ypos = height - ((table[index]-min_score) / ((max_score-min_score)/height));
             //}
@@ -278,6 +276,38 @@ function draw_dex(one_hour, two_days){
             });
         }
     }
+    
+    var key = svg.append("svg:g");
+    key.append("svg:circle")
+          .attr("cy", 355 )
+          .attr("cx", 0 )
+          .attr("r", 8) // radius of circle
+          /* .attr("fill", '#ff8a2b') */
+          .attr("fill", '#F6BB33')
+          .attr("stroke", '#999999') 
+          .style("opacity", 0.9);
+    key.append("text")
+            .attr("y", 350)
+            .attr("x", 15)
+            .attr("dy", ".71em")
+            .attr("class", "text")      
+            .text("Volume");
+    key.append("svg:circle")
+          .attr("cy", 355 )
+          .attr("cx", 80 )
+          .attr("r", 8) // radius of circle
+          /* .attr("fill", '#ff8a2b') */
+          .attr("fill", '#3ea4bf')
+          .attr("stroke", '#999999') 
+          .style("opacity", 0.9);
+    key.append("text")
+            .attr("y", 350)
+            .attr("x", 95)
+            .attr("dy", ".71em")
+            .attr("class", "text")      
+            .text("Sentiment");
+    
+    
     });
     
         
