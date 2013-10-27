@@ -14,11 +14,11 @@ def index(request):
     
     start   = request.GET["start"]
     end     = request.GET["end"]
-    keyword = r"\b"+request.GET["text"]+r"\b"
+    keyword = "\\b#?"+request.GET["text"]+"\\b"
             
-    data = [t for t in db["posts"].find({'text':{"$regex": keyword}, 'timestamp':{"$gte": start, "$lt": end}}, 
-              {'_id':0,'text':1,'user.screen_name':1, 'id_str':1,'user.profile_image_url':1, 
-               'user.name':1, 'timestamp':1}).sort( "$natural", -1 ).limit(20)]
+    data = [t for t in db["posts"].find({'text':{"$regex": keyword, "$options": "-i"}, 
+           'timestamp':{"$gte": start, "$lt": end}}, {'_id':0,'text':1,'user.screen_name':1, 
+           'id_str':1,'user.profile_image_url':1, 'user.name':1, 'timestamp':1}).sort( "$natural", -1 ).limit(20)]
     
     tweets = [{"tweet":fix_tweet(tweet['text']),
                "url":"http://twitter.com/"+tweet['user']['screen_name']+"/status/"+tweet['id_str'],
@@ -40,17 +40,23 @@ def tweets(request):
     
     start   = request.GET["start"]
     end     = request.GET["end"]
-    keyword = r"\b#?"+request.GET["text"]+r"\b"
-            
-    tweets = [t for t in db["posts"].find({'text':{"$regex": keyword}, 'timestamp':{"$gte": start, "$lt": end}}, 
-              {'_id':0,'text':1,'user.screen_name':1, 'id_str':1,
-              'user.profile_image_url':1, 'user.name':1, 'timestamp':1}).sort( "$natural", -1 )]
+
+    keyword = "\\b#?"+request.GET["text"]+"\\b"
+    tweets = [t for t in db["posts"].find({'text':{"$regex": keyword, "$options": "-i"}, 
+             'timestamp':{"$gte": start, "$lt": end}}, {'_id':0,'text':1,'user.screen_name':1, 'id_str':1,
+             'user.profile_image_url':1, 'user.name':1, 'timestamp':1}).sort( "$natural", -1 )]
+    
+    #keyword = "\b#?"+request.GET["text"]+"\b"
+    #regex   = re.compile(keyword, re.IGNORECASE)
+    #tweets = [t for t in db["posts"].find({'text':regex, 'timestamp':{"$gte": start, "$lt": end}}, 
+    #         {'_id':0,'text':1,'user.screen_name':1, 'id_str':1,
+    #          'user.profile_image_url':1, 'user.name':1, 'timestamp':1}).sort( "$natural", -1 )]
 
     data = [{"tweet":fix_tweet(tweet['text']),
              "url":"http://twitter.com/"+tweet['user']['screen_name']+"/status/"+tweet['id_str'], 
              "user":tweet['user']['screen_name'], 
              "avatar":tweet['user']['profile_image_url'], 
-             "id":tweet['id_str'], 
+             "id":tweet['id_str'],
              "name":tweet['user']['name'],
              "timestamp":datetime.datetime.strptime(tweet['timestamp'], '%Y-%m-%d %H:%M:%S').strftime("%b %d %Y")}
              for tweet in tweets]
