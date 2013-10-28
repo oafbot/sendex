@@ -176,9 +176,10 @@ LOGGING = {
 
 # ===================
 # = HEROKU SETTINGS =
-# ===================
+# =================== 
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+
+DATABASES['default'] = dj_database_url.config(default="mysql://root:"+DB_PASS+"@localhost:3306/jpndex")
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

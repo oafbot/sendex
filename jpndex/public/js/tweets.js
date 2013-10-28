@@ -13,9 +13,9 @@ function onDocumentReady(){
         if($(window).scrollTop() == $(document).height() - $(window).height()) {
             query = 'offset=' + from.toString() +"&"+ window.location.href.slice(window.location.href.indexOf('?') + 1);
             // ajax call get data from server and append to the div
+            loading = true;
             get_tweets(function(data){
                 //do something with data responded from the server
-                loading = true;
                 load_more(data);
             });
         }
@@ -23,8 +23,6 @@ function onDocumentReady(){
             loading = false;
         }
     });
-    
-
 }
 
 $.fn.appendText = function(text) {

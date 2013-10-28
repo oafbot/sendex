@@ -30,6 +30,15 @@
 h3{
     color: #aaa;
 }
+#sendex{
+    margin-bottom: 20px;
+}
+#sendex h2{
+    color:#aaa;
+    font-size: 56px;
+    font-weight: bold;
+    text-shadow: 1px 0px 1px #fff, -1px 0px 1px #777; 
+}
 
 .axis path,
 .axis line {

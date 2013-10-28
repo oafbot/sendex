@@ -10,8 +10,10 @@ def index(request):
     now   = datetime.datetime.utcnow().replace(tzinfo=utc)
     start = (now + datetime.timedelta(days=-2)).strftime("%Y-%m-%d %H:%M")
     end   = now.strftime("%Y-%m-%d %H:%M")
+    sndx  = Jpndex.objects.order_by('id').reverse()[0]
     
-    return render_to_response('home/index.html',{"page":"home", "start":start, "end":end}, context_instance=RequestContext(request))
+    return render_to_response('home/index.html',{"page":"home", "start":start, "end":end, "sndx":sndx.jpndex}, 
+    context_instance=RequestContext(request))
 
     
 def cloud(request):
