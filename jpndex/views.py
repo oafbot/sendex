@@ -9,7 +9,7 @@ from data.models import Jpndex
 def index(request):
     # redirect('home.views.index')
     now   = datetime.datetime.utcnow().replace(minute=0, second=0, microsecond=0, tzinfo=utc)
-    end   = (now + datetime.timedelta(hours=-1))
+    end   = (now + datetime.timedelta(hours=0))
     start = (end + datetime.timedelta(days=-2)).strftime("%Y-%m-%d %H:%M:%S")
     end   = end.strftime("%Y-%m-%d %H:%M:%S")
     sndx  = Jpndex.objects.order_by('id').reverse()[0]
