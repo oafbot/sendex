@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.shortcuts import redirect
 from django.utils.timezone import utc
 import datetime
-from home.models import *
+from data.models import Jpndex
 
 def index(request):
     # redirect('home.views.index')

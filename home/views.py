@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.timezone import utc
-from models import *
+#from models import *
+from data.models import *
 import json, datetime
 
 def index(request):
