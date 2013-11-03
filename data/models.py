@@ -33,7 +33,7 @@ class Jpndex(models.Model):
         ))
         
     def __unicode__(self):
-        return str(self.stamp)
+        return str(self.id)
 
 class Wordcloud(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -53,7 +53,7 @@ class Wordcloud(models.Model):
         ))
         
     def __unicode__(self):
-        return self.term    
+        return str(self.id)    
         
 class Predictor(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -72,10 +72,21 @@ class Predictor(models.Model):
         ))
     
     def __unicode__(self):
-        return self.term
+        return str(self.id)
         
 
-admin.site.register(Predictor, MultiDBModelAdmin)
-admin.site.register(Wordcloud, MultiDBModelAdmin)
-admin.site.register(Jpndex, MultiDBModelAdmin)
+ 
+# # Specialize the multi-db admin objects for use with specific models.
+class PredictorAdmin(MultiDBModelAdmin):
+    list_display = ('id', 'stamp', 'term', 'classification') 
+
+class WordcloudAdmin(MultiDBModelAdmin):
+    list_display = ('id', 'stamp', 'term', 'frequency')
+
+class SendexAdmin(MultiDBModelAdmin):
+    list_display = ('id', 'stamp', 'jpndex', 'volume')
+    
+admin.site.register(Predictor, PredictorAdmin)
+admin.site.register(Wordcloud, WordcloudAdmin)
+admin.site.register(Jpndex, SendexAdmin)
 
