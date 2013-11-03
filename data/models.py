@@ -11,6 +11,9 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib import admin
+from multi_db_model_admin import MultiDBModelAdmin
+from multi_db_tabular_inline import MultiDBTabularInline
 
 class Jpndex(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -28,6 +31,9 @@ class Jpndex(models.Model):
             ('jpndex', self.jpndex),
             ('volume', self.volume)
         ))
+        
+    def __unicode__(self):
+        return str(self.stamp)
 
 class Wordcloud(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -46,7 +52,10 @@ class Wordcloud(models.Model):
             ('frequency', self.frequency)
         ))
         
-class Predictors(models.Model):
+    def __unicode__(self):
+        return self.term    
+        
+class Predictor(models.Model):
     id = models.IntegerField(primary_key=True)
     stamp = models.DateTimeField()
     term = models.CharField(max_length=128L)
@@ -61,3 +70,12 @@ class Predictors(models.Model):
             ('term', self.term),
             ('classification', self.classification)
         ))
+    
+    def __unicode__(self):
+        return self.term
+        
+
+admin.site.register(Predictor, MultiDBModelAdmin)
+admin.site.register(Wordcloud, MultiDBModelAdmin)
+admin.site.register(Jpndex, MultiDBModelAdmin)
+

@@ -3,20 +3,19 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.timezone import utc
-#from models import *
 from data.models import *
 import json, datetime
 
 def index(request):
-    now   = datetime.datetime.utcnow().replace(tzinfo=utc)
-    start = (now + datetime.timedelta(days=-2)).strftime("%Y-%m-%d %H:%M")
-    end   = now.strftime("%Y-%m-%d %H:%M")
+    now   = datetime.datetime.utcnow().replace(minute=0, second=0, microsecond=0, tzinfo=utc)
+    end   = (now + datetime.timedelta(hours=0))
+    start = (end + datetime.timedelta(days=-2)).strftime("%Y-%m-%d %H:%M:%S")
+    end   = end.strftime("%Y-%m-%d %H:%M:%S")
     sndx  = Jpndex.objects.order_by('id').reverse()[0]
-    
+        
     return render_to_response('home/index.html',{"page":"home", "start":start, "end":end, "sndx":sndx.jpndex}, 
     context_instance=RequestContext(request))
 
-    
 def cloud(request):
     query = {}
     cloud = Wordcloud.objects
@@ -31,9 +30,7 @@ def cloud(request):
     
     data = [wc.json() for wc in cloud.filter(**query).order_by('id')]
     
-    return HttpResponse(json.dumps(data), content_type='application/json')
-    
-        
+    return HttpResponse(json.dumps(data), content_type='application/json')        
 
 def graph(request):
     query = {}
@@ -77,8 +74,7 @@ def worldmap(request):
     
     data = [{"name":loc[0].replace(" ", "_").replace("(", "_x28_").replace(")", "_x29_").replace("&", "_x26_").replace("'", "_x27_"),"size":2+loc[1]/5} for loc in locations]
     
-    return HttpResponse(json.dumps(data), content_type='application/json')
-    
+    return HttpResponse(json.dumps(data), content_type='application/json')    
 
 def tweets(request):
     import pymongo

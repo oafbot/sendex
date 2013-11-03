@@ -41,7 +41,7 @@ def graph(request):
 
 def informative(request):
     query = {}
-    predict = Predictors.objects
+    predict = Predictor.objects
     
     for param, val in request.GET.iteritems():    
         if param == "start":
